@@ -1,6 +1,6 @@
 // This code sets up and manages an IndexedDB database for the Solo Tracker application.
 
-import { openDB } from 'idb';
+import { openDB, deleteDB, wrap, unwrap } from '../../node_modules/idb/build/index.js';
 
 // Define database name and version
 const DB_NAME = 'SoloTrackerDB';

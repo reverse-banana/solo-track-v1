@@ -38,3 +38,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('save-note').addEventListener('click', handleSaveNote);
     updateNotesList();
 });
+

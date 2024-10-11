@@ -1,4 +1,4 @@
-import { ThemeManager } from './lib/theme-manager.js';
+import { ThemeManager } from '../lib/theme-manager.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM content loaded');
