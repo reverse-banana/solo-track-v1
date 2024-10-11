@@ -1,27 +1,27 @@
-// Import storage functions (adjust the path as needed)
-import { saveNote, getNote, getAllNotes } from './tempStorage.js';
+import { DBManager } from '../services/dbmanager.js';
 
 function handleSaveNote() {
     const date = document.getElementById('date-input').value;
     const content = document.getElementById('note-content').value;
-    saveNote(date, content);
+    DBManager.saveItem('dailyNotes', { date, content });
     updateNotesList();
     clearInputs();
 }
 
-function displayNote(date) {
-    const note = getNote(date);
+async function displayNote(date) {
+    const note = await DBManager.getItem('dailyNotes', date);
     if (note) {
-        document.getElementById('note-display').textContent = note;
+        document.getElementById('note-display').textContent = note.content;
     } else {
         document.getElementById('note-display').textContent = 'No note found for this date.';
     }
 }
 
-function updateNotesList() {
+async function updateNotesList() {
     const notesList = document.getElementById('notes-list');
     notesList.innerHTML = '';
-    getAllNotes().forEach(note => {
+    const notes = await DBManager.getAllItems('dailyNotes');
+    notes.forEach(note => {
         const li = document.createElement('li');
         li.textContent = `${note.date}: ${note.content.substring(0, 20)}...`;
         li.onclick = () => displayNote(note.date);

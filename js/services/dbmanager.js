@@ -4,15 +4,22 @@ import { openDB } from 'idb';
 
 // Define database name and version
 const DB_NAME = 'SoloTrackerDB';
-const DB_VERSION = 1;
+const DB_VERSION = 2; // Increment version to trigger upgrade
 
 // Create a promise that opens the database
 const dbPromise = openDB(DB_NAME, DB_VERSION, {
-  upgrade(db) {
+  upgrade(db, oldVersion, newVersion, transaction) {
     // This function runs when the database is first created or needs an upgrade
-    // It creates object stores (similar to tables in SQL databases)
-    db.createObjectStore('templates', { keyPath: 'id', autoIncrement: true });
-    db.createObjectStore('dailyNotes', { keyPath: 'date' });
+    if (oldVersion < 1) {
+      // Create initial object stores
+      db.createObjectStore('templates', { keyPath: 'id', autoIncrement: true });
+      db.createObjectStore('dailyNotes', { keyPath: 'date' });
+    }
+    if (oldVersion < 2) {
+      // Add index for template name in version 2
+      const templateStore = transaction.objectStore('templates');
+      templateStore.createIndex('nameIndex', 'name', { unique: false });
+    }
     // More object stores can be added here as needed
   },
 });
@@ -47,6 +54,15 @@ export const DataManager = {
   async clearStore(storeName) {
     const db = await dbPromise;
     return db.clear(storeName);
+  },
+
+  // Search for templates by name
+  async searchTemplatesByName(name) {
+    const db = await dbPromise;
+    const tx = db.transaction('templates', 'readonly');
+    const store = tx.objectStore('templates');
+    const index = store.index('nameIndex');
+    return index.getAll(IDBKeyRange.bound(name, name + '\uffff'));
   },
 };
 
