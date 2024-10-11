@@ -1,5 +1,5 @@
 // Import storage functions (adjust the path as needed)
-import { saveNote, getNote, getAllNotes } from '../js/tempStorage.js';
+import { saveNote, getNote, getAllNotes } from './tempStorage.js';
 
 function handleSaveNote() {
     const date = document.getElementById('date-input').value;
