@@ -1,4 +1,17 @@
-// src/models/WellnessEntry.ts
+
+export interface Context {
+  request: {
+    body: {
+      type: string;
+      value: object;
+    };
+  };
+  response: {
+    status: number;
+    body: object;
+  };
+}
+// interface used in the middleware to make function args type definitions more clear and readable
 
 export interface DailyEntryStatic {
   restTime: string; // Time of rest
