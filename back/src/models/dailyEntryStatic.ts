@@ -1,71 +1,58 @@
-
-export interface Context {
-  request: {
-    body: {
-      type: string;
-      value: object;
-    };
-  };
-  response: {
-    status: number;
-    body: object;
-  };
-}
-// interface used in the middleware to make function args type definitions more clear and readable
-
 export interface DailyEntryStatic {
-  restTime: string; // Time of rest
-  wakeUpTime: string; // Time of waking up
-  sleepDuration: number; // Duration of sleep in hours
-  sleepQuality: number; // Sleep quality rating (e.g., 0-100)
-  feelingAfterWakeUp: number; // Description of how you feel after waking up
-  physicalEnergy: number; // Physical energy level (e.g., 0-100)
-  mentalEnergy: number; // Mental energy level (e.g., 0-100)
-  emotionalEnergy: number; // Emotional energy level (e.g., 0-100)
-  mood: number; // Mood rating (e.g., 1-10)
-  discipline: number; // Discipline rating (e.g., "0" to "100")
-  courage: number; // Courage rating (e.g., 0-100)
-  temperance: number; // Temperance rating (e.g., "0" to "100")
-  wisdom: number; // Wisdom rating (e.g., "0" to "100")
-  productivity: number; // Productivity rating (e.g., 0-100)
-  water: number; // Water intake (e.g., litres in decimals)
-  holotropicalBreathing: number; // Holotropic breathing sessions
-  coldShower: number; // Cold shower sessions
-  meditation: number; // Meditation sessions
-  stretch: number; // Stretching sessions
-  workout: number; // Workout sessions
-  reading: number; // Reading sessions
-  web3: number; // Web3 learning sessions
-  musicPlaying: number; // Glucophone practice sessions
-  timeTrack: number; // Time tracking (e.g., 1 for tracked, 0 for not tracked)
+  date: string;
+  restTime?: string;
+  wakeUpTime?: string;
+  sleepDuration?: number;
+  sleepQuality?: number;
+  feelingAfterWakeUp?: number;
+  physicalEnergy?: number;
+  mentalEnergy?: number;
+  emotionalEnergy?: number;
+  mood?: number;
+  discipline?: number;
+  courage?: number;
+  temperance?: number;
+  wisdom?: number;
+  productivity?: number;
+  water?: number;
+  holotropicalBreathing?: number;
+  coldShower?: number;
+  meditation?: number;
+  stretch?: number;
+  workout?: number;
+  reading?: number;
+  web3?: number;
+  musicPlaying?: number;
+  timeTrack?: number;
 }
 
-// Function to create a new WellnessEntry with default values
+// Function to create a new DailyEntryStatic with default values
 export function createDailyEntryStatic(): DailyEntryStatic {
   return {
-    restTime: "00:00", // Default time
-    wakeUpTime: "00:00", // Default time
-    sleepDuration: 0, // Default value
-    sleepQuality: 0, // Default value
-    feelingAfterWakeUp: 0, // Default empty string
-    physicalEnergy: 0, // Default value
-    mentalEnergy: 0, // Default value
-    emotionalEnergy: 0, // Default value
-    mood: 0, // Default value
-    discipline: 0, // Default string
-    courage: 0, // Default string
-    temperance: 0, // Default string
-    wisdom: 0, // Default string
-    productivity: 0, // Default value
-    water: 0, // Default value
-    holotropicalBreathing: 0, // Default value
-    coldShower: 0, // Default value
-    meditation: 0, // Default value
-    stretch: 0, // Default value
-    workout: 0, // Default value
-    reading: 0, // Default value
-    web3: 0, // Default value
-    musicPlaying: 0, // Default value
-    timeTrack: 0, // Default value
+    date: new Date().toISOString(), // Default to current date
+    restTime: "00:00",
+    wakeUpTime: "00:00",
+    sleepDuration: 0,
+    sleepQuality: 0,
+    feelingAfterWakeUp: 0,
+    physicalEnergy: 0,
+    mentalEnergy: 0,
+    emotionalEnergy: 0,
+    mood: 0,
+    discipline: 0,
+    courage: 0,
+    temperance: 0,
+    wisdom: 0,
+    productivity: 0,
+    water: 0,
+    holotropicalBreathing: 0,
+    coldShower: 0,
+    meditation: 0,
+    stretch: 0,
+    workout: 0,
+    reading: 0,
+    web3: 0,
+    musicPlaying: 0,
+    timeTrack: 0,
   };
 }

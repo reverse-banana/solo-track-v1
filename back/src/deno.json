@@ -1,8 +1,8 @@
 {
   "tasks": {
-    "dev": "deno run --watch --allow-net server.ts"
+    "dev": "deno run --watch --allow-net --allow-read --allow-env main.ts"
   },
   "imports": {
-    "@oak/oak": "jsr:@oak/oak@^17.1.0"
+    "express": "npm:express@^4.21.1"
   }
 }
